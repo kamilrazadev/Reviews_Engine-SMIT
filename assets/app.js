@@ -60,10 +60,9 @@ function moveBackward() {
 function addReview() {
   // Get Data UI
   const userImageInput = document.getElementById("user-image-input");
-  const userNameInput = document.getElementById("user-name-input").value;
-  const userDesignationInput =
-    document.getElementById("user-desig-input").value;
-  const userInfoInput = document.getElementById("user-bio-input").value;
+  const userNameInput = document.getElementById("user-name-input");
+  const userDesignationInput = document.getElementById("user-desig-input");
+  const userInfoInput = document.getElementById("user-bio-input");
 
   if (
     userNameInput == "" ||
@@ -71,6 +70,11 @@ function addReview() {
     userInfoInput == ""
   ) {
     alert("All Fields are required");
+
+    userNameInput.value = "";
+    userDesignationInput.value = "";
+    userInfoInput.value = "";
+
     return;
   }
 
@@ -82,15 +86,18 @@ function addReview() {
 
       const userInputData = {
         image: imageUrl,
-        username: userNameInput,
-        designation: userDesignationInput,
-        bio: userInfoInput,
+        username: userNameInput.value,
+        designation: userDesignationInput.value,
+        bio: userInfoInput.value,
       };
-
-      // Set the information
+      // Set the new Review
       userData.push(userInputData);
       userCurrIndex = userData.length - 1;
       setUser();
+
+      userNameInput.value = "";
+      userDesignationInput.value = "";
+      userInfoInput.value = "";
     };
     reader.readAsDataURL(image);
   } else {
